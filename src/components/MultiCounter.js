@@ -1,6 +1,26 @@
 import React, { useState } from 'react';
 import {Button} from './Button'
 
+const Counter = ({value, index, updateCounterValue}) => {
+  const onClickPlus = () => {
+    updateCounterValue(index, value + 1);
+  }
+
+  const onClickMinus = () => {
+    updateCounterValue(index, value - 1);
+  }
+
+  return (
+    <div>
+      <div className="multi-counter">
+        <p>{value}</p>
+        <Button title={'+'} onClick={onClickPlus} />
+        <Button title={'-'} onClick={onClickMinus} />
+      </div>
+    </div>
+  )
+}
+
 function MultiCounter() {
   const [counters, setCounters] = useState([]);
 
@@ -18,35 +38,15 @@ function MultiCounter() {
     setCounters(newCounters)
   }
 
-  const Counter = ({value, index}) => {
-    const onClickPlus = () => {
-      updateCounterValue(index, value + 1);
-    }
-
-    const onClickMinus = () => {
-      updateCounterValue(index, value - 1);
-    }
-
-    return (
-      <div>
-        <div className="multi-counter">
-          <p>{value}</p>
-          <Button title={'+'} onClick={onClickPlus} />
-          <Button title={'-'} onClick={onClickMinus} />
-        </div>
-      </div>
-    )
-  }
-
   return (
     <div className="multi-counter">
-      {counters.map((counterValue, index) => {
-        return (
-          <Counter key={index} value={counterValue} index={index} />
-        )
-      })}
       <Button title={'Add counter'} onClick={addCounter} />
       <Button title={'Remove counter'} onClick={removeCounter} />
+      {counters.map((counterValue, index) => {
+        return (
+          <Counter key={index} value={counterValue} index={index} updateCounterValue={updateCounterValue} />
+        )
+      })}
     </div>
   );
 }
