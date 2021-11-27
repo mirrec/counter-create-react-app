@@ -1,25 +1,6 @@
 import React, { useState } from 'react';
 import {Button} from './Button'
-
-const Counter = ({value, index, updateCounterValue}) => {
-  const onClickPlus = () => {
-    updateCounterValue(index, value + 1);
-  }
-
-  const onClickMinus = () => {
-    updateCounterValue(index, value - 1);
-  }
-
-  return (
-    <div>
-      <div className="multi-counter">
-        <p>{value}</p>
-        <Button title={'+'} onClick={onClickPlus} />
-        <Button title={'-'} onClick={onClickMinus} />
-      </div>
-    </div>
-  )
-}
+import Counter from './Counter'
 
 function MultiCounter() {
   const [counters, setCounters] = useState([]);
